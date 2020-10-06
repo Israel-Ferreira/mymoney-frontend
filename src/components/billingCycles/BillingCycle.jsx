@@ -1,8 +1,13 @@
 import React from 'react'
+import Content from '../layout/Content'
+import ContentHeader from '../layout/ContentHeader'
 
 
 export default props => (
     <div className="BillingCycle">
-        <h1>Ciclos de Pagamentos</h1>
+        <ContentHeader title="Ciclo de Pagamentos" path="#billing-cycles"  breadcrumbTitle="Ciclos de Pagamento"/>
+        <Content>
+            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cupiditate dolores unde facere voluptas cum beatae voluptatum assumenda numquam qui consequuntur, corporis amet quasi error quia, laudantium nostrum, praesentium quod id.</p>
+        </Content>
     </div>
 )

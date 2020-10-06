@@ -9,7 +9,6 @@ import { HashRouter } from 'react-router-dom'
 import './dependencies'
 
 
-
 ReactDOM.render(
   <React.StrictMode>
     <HashRouter>
