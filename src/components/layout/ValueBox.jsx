@@ -8,7 +8,7 @@ const ValueBox = props => {
         <Grid md={props.md} sm={props.sm} xs={props.sm}>
             <div className={`ValueBox small-box bg-${props.color}`}>
                 <div className="inner">
-                    <h3>{props.result}</h3>
+                    <h3>R$ {props.result}</h3>
                     <p>{props.title}</p>
                 </div>
                 <span className="icon">

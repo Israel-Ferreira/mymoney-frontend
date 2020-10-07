@@ -1,0 +1,3 @@
+const GET_SUMMARY = 'GET_SUMMARY'
+
+export {GET_SUMMARY}

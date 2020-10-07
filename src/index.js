@@ -6,15 +6,24 @@ import * as serviceWorker from './serviceWorker';
 import { HashRouter } from 'react-router-dom'
 
 
+import { Provider } from 'react-redux'
+
+
 import './dependencies'
+import Store from './store/store';
+
+
+
 
 
 ReactDOM.render(
-  <React.StrictMode>
-    <HashRouter>
-      <App />
-    </HashRouter>
-  </React.StrictMode>,
+  <Provider store={Store}>
+    <React.StrictMode>
+      <HashRouter>
+        <App />
+      </HashRouter>
+    </React.StrictMode>
+  </Provider>,
   document.getElementById('root')
 );
 

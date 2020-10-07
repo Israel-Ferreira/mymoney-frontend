@@ -1,6 +1,6 @@
 import React from 'react'
-import Content from '../layout/Content'
-import ContentHeader from '../layout/ContentHeader'
+import Content from '../layout/content/Content'
+import ContentHeader from '../layout/content/ContentHeader'
 
 
 export default props => (
