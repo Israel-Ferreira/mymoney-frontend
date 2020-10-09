@@ -1,4 +1,4 @@
-import { GET_SUMMARY } from './actionTypes'
+import { GET_SUMMARY } from '../actions/actionTypes'
 
 const initialState = {
     summary: {
@@ -9,12 +9,7 @@ const initialState = {
 }
 
 const DashboardReducer = (state = initialState, action) => {
-    console.log(action.payload)
-
-    console.log(action)
-
     if (action.type === GET_SUMMARY) {
-        console.log(state)
         const { summary} = action.payload
         return { ...state, summary }
     }else{

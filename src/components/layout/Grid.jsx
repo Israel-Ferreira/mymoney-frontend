@@ -5,7 +5,6 @@ import PropTypes from 'prop-types'
 const Grid = props => {
     const toCssClasses = () => {
         const { xs, sm, md, lg } = props
-        console.log(md)
         return `col-xs-${xs} col-sm-${sm} col-md-${md} col-lg-${lg}`
     }
 
