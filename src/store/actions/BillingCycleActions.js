@@ -1,11 +1,28 @@
 import {toastr} from 'react-redux-toastr'
-import {reset as resetForm} from 'redux-form'
+import {initialize, reset as resetForm} from 'redux-form'
 
 
 import { getErrorsMessages } from '../../components/layout/msg/Messages'
 import BillingCycleService from '../../services/BillingCycleService'
 import { BILLING_CYCLES_FETCHED } from './actionTypes'
 import { selectTab, showTabs } from './TabActions'
+
+
+const FORM = 'billingCycleForm'
+
+const INITIAL_VALUES = {
+
+}
+
+
+export async function init(){
+    return [
+        showTabs(['tabList', 'tabCreate']),
+        selectTab('tabList'),
+        await getList(), 
+        initialize(FORM, INITIAL_VALUES)
+    ]
+}
 
 
 export async function getList() {
@@ -20,16 +37,14 @@ export async function create(values) {
         if (resp.status === 201) {
             toastr.success('Sucesso', 'Ciclo de pagamento adicionado com sucesso')
             return [
-                { type: 'FORM_SUBMITTED', payload: resp.data }, 
-                await getList(),
-                resetForm('billingCycleForm'),
-                selectTab('tabList')
+                { type: 'FORM_SUBMITTED', payload: resp.data },
+                resetForm(FORM),
+                await init()
             ]
         }
 
 
     } catch (err) {
-        console.log(err.response.data)
         const {errors} = err.response.data
         getErrorsMessages(errors).map(err => toastr.error('Erro', err))
         return {type: 'FORM_REJECTED'}
@@ -38,5 +53,15 @@ export async function create(values) {
 
 
 export function showUpdate(billingCycle){
-    return [showTabs(['tabEdit']), selectTab('tabEdit')]
+    return [
+        showTabs(['tabEdit']), 
+        selectTab('tabEdit'),
+        initialize(FORM, billingCycle)
+    ]
 }
+
+
+export function update(values){
+
+}
+

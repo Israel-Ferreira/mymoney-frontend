@@ -13,5 +13,10 @@ export default  {
     create: async (data) => {
         const resp = await axios.post(URL, data)
         return resp
+    },
+
+    update: async (id, data) => {
+        const resp = await axios.put(`${URL}/${id}`, data)
+        return resp
     }
 }
