@@ -9,6 +9,13 @@ const BillingCycleList = props => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
+    const RenderRows =  list => {
+        const newList =  list || []
+        return newList.map(item => (
+            <BillingCycleListItem key={item._id} description={item.name} month={item.month} year={item.year} />
+        ))
+    }
+
 
     return (
         <table className="table table-bordered table-hover dataTable">
@@ -21,7 +28,7 @@ const BillingCycleList = props => {
                 </tr>
             </thead>
             <tbody>
-                {props.list.map(bc => <BillingCycleListItem key={bc._id} description={bc.name} month={bc.month} year={bc.year} />)}
+                {RenderRows(props.list)}
             </tbody>
         </table>
     )
