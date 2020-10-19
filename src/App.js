@@ -4,6 +4,7 @@ import Header from './components/layout/Header';
 import Sidebar from './components/layout/Sidebar'
 import Footer from './components/layout/Footer'
 import Routes from './Routes';
+import Messages from './components/layout/msg/Messages'
 
 function App() {
   return (
@@ -14,7 +15,7 @@ function App() {
         <Routes />
       </div>
       <Footer />
-
+      <Messages />
     </div>
   );
 }

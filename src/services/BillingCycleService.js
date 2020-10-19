@@ -11,11 +11,7 @@ export default  {
     },
 
     create: async (data) => {
-        try{
-            const resp = await axios.post(URL, data)
-            return resp.data
-        }catch(err){
-            console.error(err.message)
-        }
+        const resp = await axios.post(URL, data)
+        return resp
     }
 }

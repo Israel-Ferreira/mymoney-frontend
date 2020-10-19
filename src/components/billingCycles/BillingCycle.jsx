@@ -13,7 +13,15 @@ import TabHeader from '../layout/tabs/TabHeader'
 import Tabs from '../layout/tabs/Tabs'
 import TabsContent from '../layout/tabs/TabsContent'
 import TabsHeader from '../layout/tabs/TabsHeader'
+
+
 import BillingCycleList from './BillingCycleList'
+import BillingCycleForm from './BillingCycleForm'
+
+import {create} from '../../store/actions/BillingCycleActions'
+
+
+
 
 const BillingCycle = props => {
     useEffect(() => {
@@ -39,6 +47,7 @@ const BillingCycle = props => {
 
                         <TabContent id="tabCreate">
                             <h1>Incluir Ciclo de Pagamento</h1>
+                            <BillingCycleForm onSubmit={props.createBillingCycle} />
                         </TabContent>
                         <TabContent id="tabEdit">
                             <h1>Editar Ciclo de Pagamento</h1>
@@ -64,6 +73,10 @@ const mapDispatchToProps = dispatch => {
         },
         showTabsFn: (...tabIds) => {
             const action = showTabs(tabIds)
+            dispatch(action)
+        }, 
+        createBillingCycle: async (values) => {
+            const action = await create(values)
             dispatch(action)
         }
     }
