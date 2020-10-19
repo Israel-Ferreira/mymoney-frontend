@@ -1,6 +1,8 @@
-import {createStore,combineReducers} from 'redux'
+import {createStore,combineReducers, applyMiddleware} from 'redux'
 import {reducer  as formReducer } from 'redux-form'
 import {reducer as toastrReducer} from 'react-redux-toastr'
+
+import reduxMulti from 'redux-multi';
 
 
 
@@ -23,6 +25,6 @@ const reducers  =  combineReducers({
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
 
-const Store =  createStore(reducers,devTools)
+const Store = applyMiddleware(reduxMulti)(createStore)(reducers, devTools)
 
 export default Store
