@@ -1,6 +1,6 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getList, showUpdate } from '../../store/actions/BillingCycleActions';
+import { getList, showRemove, showUpdate } from '../../store/actions/BillingCycleActions';
 import BillingCycleListItem from './BillingCycleListItem';
 
 const BillingCycleList = props => {
@@ -12,7 +12,14 @@ const BillingCycleList = props => {
     const RenderRows =  list => {
         const newList =  list || []
         return newList.map(item => (
-            <BillingCycleListItem showUpdate={() => props.showUpdateTab(item)} key={item._id} description={item.name} month={item.month} year={item.year} />
+            <BillingCycleListItem 
+                showUpdate={() => props.showUpdateTab(item)} 
+                showDelete={() => props.showDeleteTab(item)}
+                key={item._id} 
+                description={item.name} 
+                month={item.month} 
+                year={item.year} 
+            />
         ))
     }
 
@@ -47,6 +54,10 @@ const mapDispatchToProps = dispatch => {
         }, 
         showUpdateTab: (billingCycle) => {
             const action = showUpdate(billingCycle)
+            dispatch(action)
+        }, 
+        showDeleteTab: (billingCycle) => {
+            const action = showRemove(billingCycle)
             dispatch(action)
         }
     }
