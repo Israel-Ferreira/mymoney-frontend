@@ -7,12 +7,13 @@ function getErrorMessage(error){
         case "name": 
             return "Nome Inválido"
         default: 
-            return error.message
+            return error
     }
 }
 
 
 export function getErrorsMessages(errors){
+    console.log(errors)
     return errors.map(err => getErrorMessage(err))
 }
 

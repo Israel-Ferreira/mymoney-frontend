@@ -18,7 +18,7 @@ import TabsHeader from '../layout/tabs/TabsHeader'
 import BillingCycleList from './BillingCycleList'
 import BillingCycleForm from './BillingCycleForm'
 
-import {create} from '../../store/actions/BillingCycleActions'
+import {create, update} from '../../store/actions/BillingCycleSubmitActions'
 
 
 
@@ -51,7 +51,7 @@ const BillingCycle = props => {
                         </TabContent>
                         <TabContent id="tabEdit">
                             <h1>Editar Ciclo de Pagamento</h1>
-                            <BillingCycleForm  />
+                            <BillingCycleForm onSubmit={props.updateBillingCycle}  />
                         </TabContent>
                         <TabContent id="tabRemove">
                             <h1>Remover Ciclo de Pagamento</h1>
@@ -78,6 +78,10 @@ const mapDispatchToProps = dispatch => {
         }, 
         createBillingCycle: async (values) => {
             const action = await create(values)
+            dispatch(action)
+        },
+        updateBillingCycle: async (values) => {
+            const action = await update(values)
             dispatch(action)
         }
     }

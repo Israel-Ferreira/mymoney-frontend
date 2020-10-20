@@ -3,6 +3,7 @@ import {reducer  as formReducer } from 'redux-form'
 import {reducer as toastrReducer} from 'react-redux-toastr'
 
 import reduxMulti from 'redux-multi';
+import thunk from 'redux-thunk'
 
 
 
@@ -25,6 +26,6 @@ const reducers  =  combineReducers({
 const devTools = window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
 
-const Store = applyMiddleware(reduxMulti)(createStore)(reducers, devTools)
+const Store = applyMiddleware(reduxMulti, thunk)(createStore)(reducers, devTools)
 
 export default Store
