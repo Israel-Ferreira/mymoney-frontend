@@ -30,7 +30,7 @@ async function selectMethod(values, method) {
         const id = values._id
 
         if(method === "PUT"){
-            return await BillingCycleService.update(id,update)
+            return await BillingCycleService.update(id,values)
         }else{
             return await BillingCycleService.delete(id)
         }
