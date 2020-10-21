@@ -1,4 +1,5 @@
 import React from 'react'
+import PropTypes from 'prop-types'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
@@ -8,24 +9,27 @@ import { init } from '../../store/actions/BillingCycleActions'
 
 let BillingCycleForm = props => {
     return (
-        <form onSubmit={props.handleSubmit}>
+        <form onSubmit={props.handleSubmit} >
             <div className="box-body">
                 <Row>
                     <Field name="name"
                         component={LabelAndInput} label="Nome"
                         placeholder="Informe o nome"
+                        readOnly={props.readOnly}
                     />
                     <Field name="month"
                         component={LabelAndInput}
                         label="Mês"
                         type="number"
                         placeholder="Informe o mês"
+                        readOnly={props.readOnly}
                     />
                     <Field name="year"
                         component={LabelAndInput}
                         label="Ano"
                         type="number"
                         placeholder="Informe o Ano"
+                        readOnly={props.readOnly}
                     />
                 </Row>
 
@@ -36,6 +40,11 @@ let BillingCycleForm = props => {
             </div>
         </form>
     )
+}
+
+
+BillingCycleForm.defaultProps = {
+    readOnly: false
 }
 
 BillingCycleForm = reduxForm({ form: 'billingCycleForm', destroyOnUnmount: false })

@@ -18,7 +18,7 @@ import TabsHeader from '../layout/tabs/TabsHeader'
 import BillingCycleList from './BillingCycleList'
 import BillingCycleForm from './BillingCycleForm'
 
-import {create, update} from '../../store/actions/BillingCycleSubmitActions'
+import {create, remove, update} from '../../store/actions/BillingCycleSubmitActions'
 
 
 
@@ -55,6 +55,7 @@ const BillingCycle = props => {
                         </TabContent>
                         <TabContent id="tabRemove">
                             <h1>Remover Ciclo de Pagamento</h1>
+                            <BillingCycleForm readOnly={true} onSubmit={props.deleteBillingCycle}  />
                         </TabContent>
 
 
@@ -82,6 +83,11 @@ const mapDispatchToProps = dispatch => {
         },
         updateBillingCycle: async (values) => {
             const action = await update(values)
+            dispatch(action)
+        },
+
+        deleteBillingCycle: async (values) => {
+            const action =  await remove(values)
             dispatch(action)
         }
     }

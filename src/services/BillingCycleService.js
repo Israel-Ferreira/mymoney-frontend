@@ -18,5 +18,10 @@ export default  {
     update: async (id, data) => {
         const resp = await axios.put(`${URL}/${id}`, data)
         return resp
+    }, 
+
+    delete: async (id) => {
+        const resp = await axios.delete(`${URL}/${id}`)
+        return resp
     }
 }

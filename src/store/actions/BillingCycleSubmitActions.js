@@ -16,20 +16,34 @@ export async function create(values){
 }
 
 
+export async function remove(values){
+    return [
+        await submitForm(values, "DELETE", "Ciclo de Pagamento removido com sucesso")
+    ]
+}
+
+
 async function selectMethod(values, method) {
     if (method === "POST") {
         return await BillingCycleService.create(values)
-    } else if (method === "PUT") {
+    } else if (method === "PUT" || method === "DELETE") {
         const id = values._id
-        return await BillingCycleService.update(id, values)
+
+        if(method === "PUT"){
+            return await BillingCycleService.update(id,update)
+        }else{
+            return await BillingCycleService.delete(id)
+        }
     }
 }
+
 
 async function submitForm(values, method, successMsg = "Success") {
     try {
         const resp = await selectMethod(values, method)
+        const VALID_STATUS = [201, 200, 204]
 
-        if (resp.status === 201 || resp.status === 200) {
+        if (VALID_STATUS.includes(resp.status)) {
             toastr.success('Sucesso', successMsg)
             return [
                 { type: 'FORM_SUBMITTED', payload: resp.data },
