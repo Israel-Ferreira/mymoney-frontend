@@ -58,7 +58,8 @@ const ItemList = props => {
                         <tr>
                             <th>Nome</th>
                             <th>Valor</th>
-                            <th>Ações</th>
+                            {props.type === "debits" ? (<th>Status</th>) : <th></th>}
+                            <th>Ações</th>        
                         </tr>
                     </thead>
 

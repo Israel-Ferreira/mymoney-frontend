@@ -1,9 +1,27 @@
 import React from 'react'
-import { Field } from 'redux-form'
+import { Field, } from 'redux-form'
 import PropTypes from 'prop-types'
 
 import Input from '../layout/form/Input'
 import IconButton from '../buttons/IconButton'
+
+
+
+
+const StatusField = ({ fieldType, index, item }) => {
+    if (fieldType === "debits") {
+        return (
+            <Field name={`${fieldType}[${index}].status`} component="select" className="form-control">
+                <option selected value="PENDENTE">PENDENTE</option>
+                <option value="PAGO">PAGO</option>
+                <option value="AGENDADO">AGENDADO</option>
+            </Field>
+        )
+    } else {
+        return <span></span>
+    }
+}
+
 
 const Item = props => {
     return (
@@ -25,11 +43,16 @@ const Item = props => {
                     readOnly={props.readOnly}
                 />
             </td>
+            <td className="item-list-column">
+                <StatusField fieldType={props.type} index={props.index} item={props.item} />
+            </td>
             <td className="bc-actions">
                 <IconButton type="button" icon="plus" color="success" handleClick={props.handleAdd} />
                 <IconButton type="button" icon="clone" color="warning" handleClick={props.handleClone} />
                 <IconButton icon="trash-o" color="danger" handleClick={props.handleRemove} />
             </td>
+
+
         </tr>
     )
 
@@ -40,7 +63,7 @@ Item.propTypes = {
     index: PropTypes.number.isRequired,
     item: PropTypes.object.isRequired,
     handleRemove: PropTypes.func.isRequired,
-    handleClone: PropTypes.func, 
+    handleClone: PropTypes.func,
     readOnly: PropTypes.bool,
     type: PropTypes.string
 }
