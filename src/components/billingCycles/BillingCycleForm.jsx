@@ -7,8 +7,27 @@ import Row from '../layout/Row'
 import { FORM, init } from '../../store/actions/BillingCycleActions'
 
 import ItemList from './ItemList'
+import Summary from './Summary'
+import { useEffect } from 'react'
 
 let BillingCycleForm = props => {
+    
+    const calculateSummary =  () => {
+        const sum =  (x,y) => x + y
+        
+
+        const debitsRes =  props.debits.map(debit => +debit.value || 0).reduce(sum)
+        const creditRes =  props.credits.map(credit => +credit.value || 0).reduce(sum)
+
+        return {debit: debitsRes, credit: creditRes}
+    }
+
+
+
+
+    const {credit, debit} =  calculateSummary()
+
+
     return (
         <form onSubmit={props.handleSubmit} >
             <div className="box-body">
@@ -32,6 +51,9 @@ let BillingCycleForm = props => {
                         placeholder="Informe o Ano"
                         readOnly={props.readOnly}
                     />
+                </Row>
+                <Row>
+                    <Summary credit={credit} debit={debit} />
                 </Row>
                 <Row>
                     <ItemList title="Créditos" readOnly={props.readOnly} list={props.credits}  type='credits' />

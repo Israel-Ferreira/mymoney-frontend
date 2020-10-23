@@ -16,10 +16,11 @@ const INITIAL_VALUES = {
 
 export async function init() {
     return [
+        initialize(FORM, INITIAL_VALUES),
         showTabs(['tabList', 'tabCreate']),
         selectTab('tabList'),
         await getList(),
-        initialize(FORM, INITIAL_VALUES)
+        
     ]
 }
 
