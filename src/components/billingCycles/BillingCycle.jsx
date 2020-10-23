@@ -18,16 +18,16 @@ import TabsHeader from '../layout/tabs/TabsHeader'
 import BillingCycleList from './BillingCycleList'
 import BillingCycleForm from './BillingCycleForm'
 
-import {create, remove, update} from '../../store/actions/BillingCycleSubmitActions'
+import {init} from '../../store/actions/BillingCycleActions'
+import { create, remove, update } from '../../store/actions/BillingCycleSubmitActions'
 
 
 
 
 const BillingCycle = props => {
     useEffect(() => {
-        props.initialSelectedTab('tabList')
-        props.showTabsFn('tabList', 'tabCreate')
-    },[])
+        props.initState()
+    }, [])
 
     return (
         <div className="BillingCycle">
@@ -51,11 +51,20 @@ const BillingCycle = props => {
                         </TabContent>
                         <TabContent id="tabEdit">
                             <h1>Editar Ciclo de Pagamento</h1>
-                            <BillingCycleForm onSubmit={props.updateBillingCycle}  />
+                            <BillingCycleForm
+                                submitColor="info"
+                                onSubmit={props.updateBillingCycle}
+                                submitText="Alterar"
+                            />
                         </TabContent>
                         <TabContent id="tabRemove">
                             <h1>Remover Ciclo de Pagamento</h1>
-                            <BillingCycleForm readOnly={true} onSubmit={props.deleteBillingCycle}  />
+                            <BillingCycleForm
+                                submitColor="danger"
+                                readOnly={true} 
+                                onSubmit={props.deleteBillingCycle} 
+                                submitText="Remover"
+                            />
                         </TabContent>
 
 
@@ -76,7 +85,7 @@ const mapDispatchToProps = dispatch => {
         showTabsFn: (...tabIds) => {
             const action = showTabs(tabIds)
             dispatch(action)
-        }, 
+        },
         createBillingCycle: async (values) => {
             const action = await create(values)
             dispatch(action)
@@ -87,7 +96,12 @@ const mapDispatchToProps = dispatch => {
         },
 
         deleteBillingCycle: async (values) => {
-            const action =  await remove(values)
+            const action = await remove(values)
+            dispatch(action)
+        },
+
+        initState: async () => {
+            const action = await init()
             dispatch(action)
         }
     }

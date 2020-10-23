@@ -9,7 +9,8 @@ import { selectTab, showTabs } from './TabActions'
 export const FORM = 'billingCycleForm'
 
 const INITIAL_VALUES = {
-
+    credits: [{}],
+    debits: [{}]
 }
 
 

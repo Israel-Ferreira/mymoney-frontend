@@ -1,11 +1,12 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-import { Field, reduxForm } from 'redux-form'
+import { Field, reduxForm, formValueSelector } from 'redux-form'
 import { connect } from 'react-redux'
 
 import LabelAndInput from '../layout/form/LabelAndInput'
 import Row from '../layout/Row'
-import { init } from '../../store/actions/BillingCycleActions'
+import { FORM, init } from '../../store/actions/BillingCycleActions'
+
+import ItemList from './ItemList'
 
 let BillingCycleForm = props => {
     return (
@@ -32,11 +33,15 @@ let BillingCycleForm = props => {
                         readOnly={props.readOnly}
                     />
                 </Row>
+                <Row>
+                    <ItemList title="Créditos" readOnly={props.readOnly} list={props.credits}  type='credits' />
+                    <ItemList title="Débitos" readOnly={props.readOnly} type='debits' list={props.debits} />
+                </Row>
 
             </div>
             <div className="box-footer">
-                <button type="submit" className="btn btn-primary">Submit</button>
-                <button type="button" className="btn btn-danger" onClick={props.initHome} >Cancelar</button>
+                <button type="submit" className={`btn btn-${props.submitColor}`}>{props.submitText}</button>
+                <button type="button" className="btn" onClick={props.initHome} >Cancelar</button>
             </div>
         </form>
     )
@@ -44,11 +49,13 @@ let BillingCycleForm = props => {
 
 
 BillingCycleForm.defaultProps = {
-    readOnly: false
+    readOnly: false,
+    submitColor: 'primary',
+    submitText: 'Adicionar'
 }
 
 BillingCycleForm = reduxForm({ form: 'billingCycleForm', destroyOnUnmount: false })
-(BillingCycleForm)
+    (BillingCycleForm)
 
 const mapDispatchToProps = dispatch => {
     return {
@@ -59,4 +66,11 @@ const mapDispatchToProps = dispatch => {
     }
 }
 
-export default connect(null, mapDispatchToProps)(BillingCycleForm)
+const selector = formValueSelector(FORM)
+
+const mapStateToProps = state => ({
+    credits: selector(state, 'credits'),
+    debits: selector(state, 'debits')
+})
+
+export default connect(mapStateToProps, mapDispatchToProps)(BillingCycleForm)

@@ -30,7 +30,7 @@ Grid.defaultProps = {
     xs: 12,
     sm: 8,
     md: 6,
-    lg: 4
+    lg: 6
 }
 
 
