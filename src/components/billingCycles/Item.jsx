@@ -4,22 +4,21 @@ import PropTypes from 'prop-types'
 
 import Input from '../layout/form/Input'
 import IconButton from '../buttons/IconButton'
+import If from '../operators/If'
 
 
 
 
-const StatusField = ({ fieldType, index, item }) => {
-    if (fieldType === "debits") {
-        return (
+const StatusField = ({ fieldType, index }) => {
+    return (
+        <If test={fieldType === "debits"}>
             <Field name={`${fieldType}[${index}].status`} component="select" className="form-control">
                 <option selected value="PENDENTE">PENDENTE</option>
                 <option value="PAGO">PAGO</option>
                 <option value="AGENDADO">AGENDADO</option>
             </Field>
-        )
-    } else {
-        return <span></span>
-    }
+        </If>
+    )
 }
 
 
@@ -44,7 +43,7 @@ const Item = props => {
                 />
             </td>
             <td className="item-list-column">
-                <StatusField fieldType={props.type} index={props.index} item={props.item} />
+                <StatusField fieldType={props.type} index={props.index}  />
             </td>
             <td className="bc-actions">
                 <IconButton type="button" icon="plus" color="success" handleClick={props.handleAdd} />

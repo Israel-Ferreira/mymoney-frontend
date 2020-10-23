@@ -9,6 +9,7 @@ import { FORM } from '../../store/actions/BillingCycleActions'
 
 import Grid from '../layout/Grid'
 import Item from './Item'
+import If from '../operators/If'
 
 
 
@@ -58,7 +59,13 @@ const ItemList = props => {
                         <tr>
                             <th>Nome</th>
                             <th>Valor</th>
-                            {props.type === "debits" ? (<th>Status</th>) : <th></th>}
+                            <If test={props.type === "debits"}>
+                                <th>Status</th>
+                            </If>
+                            
+                            <If test={!props.type === "debits"}>
+                                <th></th>
+                            </If>
                             <th>Ações</th>        
                         </tr>
                     </thead>
